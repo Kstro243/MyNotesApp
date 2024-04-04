@@ -1,0 +1,63 @@
+<form>
+    <h3>Enter your email and password</h3>
+    <div class="login-inputs-container">
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input 
+                type="text"
+                matInput
+                [formControl]="emailInput"
+                placeholder="Enter a title"
+            >
+            <mat-error *ngIf="emailInput.hasError('required')">
+                You must enter an email
+            </mat-error>
+            <button
+                type="button"
+                matSuffix
+                mat-icon-button
+                color="primary"
+                aria-label="Clear the email"
+                [disabled]="emailInput.value === '' || emailInput.value === null"
+                (click)="clearEmailInput()"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input 
+                type="text"
+                matInput
+                [formControl]="passwordInput"
+                placeholder="Enter a password"
+            >
+            <mat-error *ngIf="passwordInput.hasError('required')">
+                You must enter a password
+            </mat-error>
+            <button
+                type="button"
+                matSuffix
+                mat-icon-button
+                color="primary"
+                aria-label="Clear the password"
+                [disabled]="passwordInput.value === '' || passwordInput.value === null"
+                (click)="clearPasswordInput()"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <button 
+        mat-flat-button 
+        color="primary"
+        (click)="login()"
+        [disabled]="
+            emailInput.invalid ||
+            passwordInput.invalid
+        "
+    >
+        Save
+        <mat-icon>save</mat-icon>
+    </button>
+</form>

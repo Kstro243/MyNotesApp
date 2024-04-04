@@ -1,0 +1,156 @@
+<app-login-form 
+    *ngIf="showLoginForm"
+    class="login-form-component"
+    (setLoader)="setLoader($event)"
+    (setMessage)="openSnackbar($event)"
+></app-login-form>
+<header>
+    <h1>MyNotesApp</h1>
+</header>
+<div class="what-to-do-container">
+    <h2>
+        What do you want to do?
+    </h2>
+</div>
+<section>
+    <button class="button-general" mat-raised-button [matMenuTriggerFor]="menu">
+        Filter
+        <mat-icon>tune</mat-icon>
+    </button>
+    <button class="button-general" mat-raised-button (click)="createNote()">
+        Create note
+        <mat-icon>add_circle_outline</mat-icon>
+    </button>
+    <button class="button-general" mat-raised-button (click)="toggleSeeActive()">
+        See {{ seeActive ? "archived" : "active" }}
+        <mat-icon
+            *ngIf="seeActive"
+        >
+            archive
+        </mat-icon>
+        <mat-icon
+            *ngIf="!seeActive"
+        >
+            check_circle_outline
+        </mat-icon>
+    </button>
+</section>
+<mat-menu 
+    #menu 
+    (click)="$event.stopPropagation(); $event.preventDefault()"
+    class="menu-for-filters"
+    xPosition="after"
+    yPosition="above"
+>
+    <p>Filter by...</p>
+    <div class="filters-container" >
+        <mat-form-field appearance="outline" (click)="$event.stopPropagation()">
+            <mat-label>Category</mat-label>
+            <mat-select
+                [formControl]="categoryFilter"
+                placeholder="Select a category"
+                aria-label="Select a category"
+            >
+                <mat-option 
+                    *ngFor="let category of categoryList" 
+                    [value]="category"
+                >
+                    {{ category.name | titlecase }}
+                </mat-option>
+            </mat-select>
+            <button
+                matSuffix
+                type="button"
+                mat-icon-button
+                aria-label="Clear"
+                color="primary"
+                (click)="clearCategoryFilter()"
+                [disabled]="categoryFilter.value === null || categoryFilter.value === ''"
+            >
+                <mat-icon>clear </mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field appearance="outline" (click)="$event.stopPropagation()">
+            <mat-label>Title</mat-label>
+            <input 
+                type="text"
+                matInput
+                [formControl]="titleFilter"
+                placeholder="Enter a title"
+            >
+            <button
+                type="button"
+                matSuffix
+                mat-icon-button
+                color="primary"
+                aria-label="Clear the title"
+                [disabled]="titleFilter.value === '' || titleFilter.value === null"
+                (click)="clearTitleFilter()"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field appearance="outline" (click)="$event.stopPropagation()">
+            <mat-label>Description</mat-label>
+            <input 
+                type="text"
+                matInput
+                [formControl]="descriptionFilter"
+                placeholder="Enter a description"
+            >
+            <button
+                type="button"
+                matSuffix
+                mat-icon-button
+                color="primary"
+                aria-label="Clear the description"
+                [disabled]="descriptionFilter.value === '' || descriptionFilter.value === null"
+                (click)="clearDescriptionFilter()"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+</mat-menu>
+<div class="your-notes-title-container">
+    <h2>
+        Your {{ seeActive ? "active" : "archived" }} notes
+    </h2>
+</div>
+<div class="notes-list-container">
+    <div *ngFor="let note of listToShow">
+        <div class="notes-container"
+            *ngIf="note.isActive === seeActive"
+            [style.backgroundColor]="note.category?.colorCode"
+        >
+            <div 
+                class="title-and-description-container"
+            >
+                <h3>{{ note.title + ' - ' + note.category?.name }}</h3>
+                <p>{{ note.description }}</p>
+            </div>
+            <div 
+                class="icons-container"
+            >
+                <button
+                    *ngFor="let iconButton of iconButtonList"
+                    mat-icon-button 
+                    (click)="iconButtonAction(note, iconButton)"
+                    [matTooltip]="iconButton.action"
+                >
+                    <mat-icon>
+                        {{ iconButton.icon }}
+                    </mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="empty-list-container" *ngIf="listToShow.length === 0 && !showLoginForm">
+        <p>You haven't created any notes yet :c</p>
+    </div>
+</div>
+<div class="mat-spinner-background" *ngIf="isCharging">
+    <div class="mat-spinner-container">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>

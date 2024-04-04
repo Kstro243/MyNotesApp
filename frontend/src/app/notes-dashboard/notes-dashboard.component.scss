@@ -1,0 +1,153 @@
+@import "../../styles.scss";
+
+.login-form-component {
+    position: absolute;
+    z-index: 2;
+    width: 100vw;
+    height: 100vh;
+    background-color: #d5d5d542;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header {
+    width: 100vw;
+    background-color: $color-header;
+    height: 8%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+h1 {
+    color: $color-background;
+}
+.what-to-do-container,
+.your-notes-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 24px;
+}
+
+
+section {
+    display: flex;
+    justify-content: space-around;
+    height: 50px;
+    margin: 0px 40px 20px;
+    padding: 14px 0px 18px;
+    border-bottom: 1px $color-background solid;
+}
+.mat-mdc-raised-button.button-general {
+    background-color: $color-background;
+    height: 40px;
+}
+::ng-deep .mat-mdc-menu-panel.menu-for-filters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 280px;
+
+    position: relative;
+    bottom: 158px;
+    left: 94px;
+}
+.filters-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.notes-list-container {
+    overflow-y: auto;
+    max-height: 58%;
+
+    display: flex;
+    flex-direction: column;
+}
+.notes-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 0px 30px 15px;
+    padding: 10px 32px;
+
+    border-radius: 16px;
+}
+.title-and-description-container {
+    margin: 0px 12px;
+    width: 88%;
+}
+h3 {
+    margin: 6px 0px;
+}
+.icons-container {
+    display: flex;
+    justify-content: space-between;
+    width: 10%;
+}
+
+.empty-list-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-background;
+    border-radius: 24px;
+
+    height: 62px;
+    width: 40%;
+    align-self: center;
+    p {
+        margin: 0;
+    }
+}
+
+.mat-spinner-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #d5d5d542;
+    z-index: 5;
+}
+.mat-spinner-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+::ng-deep .snackbar-styles {
+    --mdc-snackbar-container-color: #112D4E;
+}
+
+@media only screen and (max-width: 600px) {
+    .what-to-do-container {
+        height: 56px;
+        display: flex;
+        flex-direction: column;
+    }
+    .mat-mdc-raised-button.button-general {
+        background-color: $color-background;
+        height: 56px;
+        display: flex;
+        flex-direction: column;
+    }
+    .icons-container {
+        flex-direction: column;
+    }
+    ::ng-deep .mat-mdc-menu-panel.menu-for-filters {
+        bottom: 174px;
+        left: 30px;
+    }
+
+    .notes-list-container {
+        max-height: 62%;
+    }
+
+    .empty-list-container {
+        width: 85%;
+    }
+}

@@ -1,0 +1,29 @@
+@import "../../../src/styles.scss";
+
+form {
+    width: 378px;
+    height: 40%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    border-radius: 20px;
+
+    background-color: $color-background;
+}
+
+.login-inputs-container {
+    display: flex;
+    flex-direction: column;
+    height: 52%;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 600px) {
+    form {
+        top: 34%;
+        left: 18%;
+    }
+}

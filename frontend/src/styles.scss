@@ -1,0 +1,115 @@
+@use "@angular/material" as mat;
+@import "@angular/material/theming";
+@include mat.core();
+$custom-primary-palette: (
+  50: #e3e4f0,
+  100: #b8bdd9,
+  200: #8991c0,
+  300: #5a64a6,
+  400: #364393,
+  500: #132280,
+  600: #111e78,
+  700: #0e196d,
+  800: #0b1463,
+  900: #060c50,
+  A100: #8489ff,
+  A200: #5159ff,
+  A400: #1e28ff,
+  A700: #0410ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$custom-accent-palette: (
+  50: #f9e7f1,
+  100: #f0c2db,
+  200: #e699c4,
+  300: #db70ac,
+  400: #d4529a,
+  500: #cc3388,
+  600: #c72e80,
+  700: #c02775,
+  800: #b9206b,
+  900: #ad1458,
+  A100: #ffe0ec,
+  A200: #ffadce,
+  A400: #ff7ab0,
+  A700: #ff60a0,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$color-primary: mat.define-palette($custom-primary-palette);
+$color-accent: mat.define-palette($custom-accent-palette, 500, 400, 600);
+$color-warn: mat.define-palette(mat.$red-palette);
+$color-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $color-primary,
+      accent: $color-accent,
+      warn: $color-warn,
+    ),
+    density: -2,
+  )
+);
+@include mat.all-component-themes($color-theme);
+
+$color-header:  #112D4E;
+$color-main-background: #DBE2EF;
+$color-background: #F9F7F7;
+$color-font: black;
+
+$font-family: "Jaldi", sans-serif;
+h1,
+h2,
+h3 {
+  font-weight: bold;
+  font-family: $font-family;
+}
+h1 {
+    font-size: 30px;
+    color: $color-background;
+}
+h2 {
+    font-size: 26px;
+}
+h3 {
+    font-size: 22px;
+}
+p {
+    font-size: 18px;
+}
+body,
+h1,
+h2,
+h3 {
+    margin: 0;
+}

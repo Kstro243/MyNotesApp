@@ -1,0 +1,126 @@
+<form>
+    <div class="dialog-title" >
+        <h2 *ngIf="isEditMode">Edit note</h2>
+        <h2 *ngIf="!isEditMode">Create note</h2>
+        <button
+            type="button"
+            mat-icon-button
+            color="primary"
+            aria-label="Go back to list"
+            [mat-dialog-close]="null"
+            class="close-dialog"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="form-fields-container" >
+        <mat-form-field appearance="outline" >
+            <mat-label>Title</mat-label>
+            <input 
+                type="text"
+                matInput
+                [formControl]="titleField"
+                placeholder="Enter a title"
+            >
+            <mat-error *ngIf="titleField.hasError('required')">
+                You must enter a title
+            </mat-error>
+            <mat-error *ngIf="descriptionField.hasError('maxlength')">
+                Description may not exceed 45 characters
+            </mat-error>
+            <button
+                type="button"
+                matSuffix
+                mat-icon-button
+                color="primary"
+                aria-label="Clear the title"
+                [disabled]="titleField.value === ''"
+                (click)="clearTitleField()"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field appearance="outline" >
+            <mat-label>Description</mat-label>
+            <input 
+                type="text"
+                matInput
+                [formControl]="descriptionField"
+                placeholder="Enter a description"
+            >
+            <mat-error *ngIf="descriptionField.hasError('required')">
+                You must enter a description
+            </mat-error>
+            <mat-error *ngIf="descriptionField.hasError('maxlength')">
+                Description may not exceed 400 characters
+            </mat-error>
+            <button
+                type="button"
+                matSuffix
+                mat-icon-button
+                color="primary"
+                aria-label="Clear the description"
+                [disabled]="descriptionField.value === ''"
+                (click)="clearDescriptionField()"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select
+                [formControl]="categoryField"
+                placeholder="Select a category"
+                aria-label="Select a category"
+                [compareWith]="displayCategoryName"
+            >
+                <mat-option *ngFor="let category of categoryList" [value]="category">
+                    {{ category.name | titlecase }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="categoryField.hasError('required')">
+                You must select a category
+            </mat-error>
+            <button
+                matSuffix
+                type="button"
+                mat-icon-button
+                aria-label="Clear"
+                color="primary"
+                (click)="clearCategoryField()"
+                [disabled]="categoryField.value === null"
+            >
+                <mat-icon>clear </mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-checkbox
+          color="primary"
+          labelPosition="before"
+          [formControl]="wantToArchive"
+        >Do you want to archive it?
+        </mat-checkbox>
+    </div>
+    <div class="buttons-container">
+        <button 
+            mat-flat-button 
+            color="accent"
+            [mat-dialog-close]="null"
+        >
+            Close
+            <mat-icon>close</mat-icon>
+        </button>
+        <button 
+            mat-flat-button 
+            color="primary"
+            (click)="saveChanges()"
+            [disabled]="
+                titleField.invalid ||
+                categoryField.invalid || 
+                descriptionField.invalid
+            "
+        >
+            Save
+            <mat-icon>save</mat-icon>
+        </button>
+    </div>
+</form>

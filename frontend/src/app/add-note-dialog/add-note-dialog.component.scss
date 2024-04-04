@@ -1,0 +1,33 @@
+@import "../../styles.scss";
+form {
+    height: 388px;
+    width: 354px;
+}
+h2 {
+    margin: 0;
+}
+.close-dialog {
+    position: relative;
+    left: 48px;
+}
+.dialog-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 16%;
+}
+.form-fields-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 68%;
+}
+mat-form-field {
+    margin-bottom: 6px;
+    width: 80%;
+}
+.buttons-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 8px;
+}
